@@ -1,0 +1,14 @@
+build
+make.out
+profile.out
+.DS_Store
+*.html
+*.so
+*.pyc
+*~
+*.png
+*.vtk
+prof
+dist/
+docs/_build
+pyquante2.egg-info/
