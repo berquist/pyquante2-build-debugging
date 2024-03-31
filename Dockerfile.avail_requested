@@ -1,0 +1,3 @@
+FROM pyquante2/base:latest
+
+RUN just venv-avail-requested

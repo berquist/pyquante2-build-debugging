@@ -1,0 +1,10 @@
+# hadolint ignore=DL3007
+FROM docker.io/library/archlinux:latest
+
+RUN pacman -Syu --noconfirm \
+    && pacman -S --noconfirm \
+    just \
+    python
+
+WORKDIR /tmp/pyquante2
+COPY ./ ./
