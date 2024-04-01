@@ -16,5 +16,6 @@ deploy_files=(
 
 # shellcheck: disable=SC2068
 for f in ${deploy_files[@]}; do
-    ln -fsv "${SCRIPTDIR}/${f}" "${PWD}/${f}"
+    # hard links for copying into Docker images
+    ln -fv "${SCRIPTDIR}/${f}" "${PWD}/${f}"
 done
