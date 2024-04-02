@@ -31,7 +31,7 @@ venv-not-avail-not-requested:
     -rm -r venv_not_avail_not_requested
     python -m venv ./venv_not_avail_not_requested
     source ./venv_not_avail_not_requested/bin/activate && \
-        PYQUANTE_CYTHON_REQUESTED=true \
+        PYQUANTE_CYTHON_DISABLED=true \
         bash ./venv.bash | tee not_avail_not_requested.log && \
         deactivate
 
@@ -41,7 +41,6 @@ venv-avail-requested:
     python -m venv ./venv_avail_requested
     source ./venv_avail_requested/bin/activate && \
     python -m pip install 'Cython<3' && \
-        PYQUANTE_CYTHON_REQUESTED=true \
         bash ./venv.bash | tee avail_requested.log && \
         deactivate
 
@@ -51,15 +50,16 @@ venv-avail-not-requested:
     python -m venv ./venv_avail_not_requested
     source ./venv_avail_not_requested/bin/activate && \
     python -m pip install 'Cython<3' && \
+        PYQUANTE_CYTHON_DISABLED=true \
         bash ./venv.bash | tee  avail_not_requested.log && \
         deactivate
 
 image-build:
     podman pull docker.io/library/archlinux:latest
     podman build -t pyquante2/base:latest -f Dockerfile.base .
-    # podman build -t pyquante2/not_avail_requested -f Dockerfile.not_avail_requested .
-    # podman build -t pyquante2/not_avail_not_requested -f Dockerfile.not_avail_not_requested .
-    # podman build -t pyquante2/avail_requested -f Dockerfile.avail_requested .
+    podman build -t pyquante2/not_avail_requested -f Dockerfile.not_avail_requested .
+    podman build -t pyquante2/not_avail_not_requested -f Dockerfile.not_avail_not_requested .
+    podman build -t pyquante2/avail_requested -f Dockerfile.avail_requested .
     podman build -t pyquante2/avail_not_requested -f Dockerfile.avail_not_requested .
 
 image-shell:
