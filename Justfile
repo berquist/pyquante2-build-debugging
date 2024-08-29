@@ -13,10 +13,10 @@ venv-cython:
     # git clean -Xdf .
     python -m venv ./venv_311_cython
     source ./venv_311_cython/bin/activate && \
-    python -m pip install 'Cython<3' && \
+    python -m pip install 'Cython' && \
         bash ./venv.bash >& cython.log && \
         deactivate
-# python -m pip install 'Cython<3' && \
+# python -m pip install 'Cython' && \
 
 venv-not-avail-requested:
     -deactivate
@@ -40,7 +40,7 @@ venv-avail-requested:
     -rm -r venv_avail_requested
     python -m venv ./venv_avail_requested
     source ./venv_avail_requested/bin/activate && \
-    python -m pip install 'Cython<3' && \
+    python -m pip install 'Cython' && \
         bash ./venv.bash | tee avail_requested.log && \
         deactivate
 
@@ -49,9 +49,9 @@ venv-avail-not-requested:
     -rm -r venv_avail_not_requested
     python -m venv ./venv_avail_not_requested
     source ./venv_avail_not_requested/bin/activate && \
-    python -m pip install 'Cython<3' && \
+    python -m pip install 'Cython' && \
         PYQUANTE_CYTHON_DISABLED=true \
-        bash ./venv.bash | tee  avail_not_requested.log && \
+        bash ./venv.bash | tee avail_not_requested.log && \
         deactivate
 
 image-build:
