@@ -1,4 +1,4 @@
-FROM docker.io/library/archlinux:latest@sha256:876f1f601e5fe6ceda682ac9b0a8df06be695fe9e2c85d04f48a877f17e46b45
+FROM docker.io/library/archlinux:latest@sha256:ad18112a3888d427b18a004309eff649418b68ddee0e71004c36b87630baac4c
 
 RUN pacman -Syu --noconfirm \
     && pacman -S --noconfirm \
