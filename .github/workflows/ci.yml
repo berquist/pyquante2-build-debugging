@@ -1,0 +1,36 @@
+---
+name: ci
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: ci-${{github.ref}}-${{github.event.pull_request.number || github.run_number}}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  prechecks:
+    uses: ./.github/workflows/pre-commit.yml
+  separate-zizmor:
+    uses: ./.github/workflows/zizmor.yml
+  all-prechecks:
+    name: CI precheck success
+    needs: [prechecks, separate-zizmor]
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Success
+        run: "true"
+  build:
+    needs: [all-prechecks]
+    uses: ./.github/workflows/build.yml
+  all:
+    name: CI success
+    needs: [build]
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Success
+        run: "true"
